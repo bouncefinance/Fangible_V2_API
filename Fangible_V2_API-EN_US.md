@@ -4,12 +4,11 @@
 >
 > Email: homie_xu@163.com ( If you have any interface problem, please contact me )
 >
-> Update main content: ( 2021-5-24 )
+> Update main content: ( 2021-5-25 )
 >
-> 1. Re-edit the interface document and added Typing
-> 2. Added  `Fast Moves` and  **`Host Brands`** for the homepage endpoints
-> 3. Added an endpoint for **creating brand** and an endpoint for obtaining **my brand List**
-> 4. Correct the spelling error of the world (`auction` ) in `# /api/v2/main/getauctionpoolsbypage`
+> 1. added 2.2 2.3 Three interfaces on the pool details page
+> 2. added 2.5 Get NFT details function
+> 3. three new Typing
 
 ## Function roadmap
 
@@ -58,6 +57,10 @@ result = {
 	"data": IBrandData[]			// import { IBrandData } from Typing
 }
 ```
+
+#### 1.3 Banner Brands
+
+testing...
 
 ------
 
@@ -120,6 +123,75 @@ result = {
 - **offset**: Query the number of pages of data，The index starts at 0
 
 - **orderfield**: sortord, Enum-type( 1:  New  create time 2:  Popular weight)
+
+#### 2.2 Pool Detail (Pool Info)
+
+```jsx
+# /api/v2/main/getpoolinfo
+
+params = {
+	"poolid": 3,
+	"pooltype": 1 			// 1:fixedpool 2:EnglishAuction,
+}
+
+result = {
+    code: 1,
+    data: IPoolData		// import { IPoolData } from Typing
+}
+```
+
+#### 2.3 Pool Detail (Offers List)
+
+```jsx
+# /api/v2/main/getpoolbids
+
+params = {
+	"poolid": 3,
+	"pooltype": 1 			// 1:fixedpool 2:EnglishAuction
+}
+
+result = {
+    code: 1,
+    data: IOfferData_EnglishAuction | IOfferData_FixedSwap		
+    // import { IOfferData_EnglishAuction, IOfferData_FixedSwap } from Typing
+}
+```
+
+#### 2.4 Pool Detail (Trading History)
+
+testing...
+
+```jsx
+# /api/v2/main/getpoolactivities
+
+params = {
+	"poolid": 3,
+	"pooltype": 1 			// 1:fixedpool 2:EnglishAuction
+}
+
+result = {
+    code: 1,
+    data: IHistoryData		// import { IHistoryData } from Typing
+}
+```
+
+#### 2.5 Get NFT Info
+
+```jsx
+# /api/v2/main/getonenftinfo
+
+params = {
+	"contractaddress": "0xaAAeAe4283635358946E653883cD12E5c06cC5E3",
+	"tokenid": 16791
+}
+
+result = {
+    code: 1,
+    data: INftData		// import { INftData } from Typing
+}
+```
+
+
 
 --------
 
@@ -271,4 +343,75 @@ interface IBrandData {
 ```
 
 - popularweight: Each time the pool is accessed, the weight will increase by 1, and the weight can be changed directly in the background
+
+### 3.IOfferData
+
+```tsx
+interface IOfferData_EnglishAuction {
+    "id": number,						
+    "height": number,				// Block height
+    "sender": string as address,	
+    "pool_id": number,				// Pool ID
+    "amount1": string,				// offer a price
+    "ctime": number,				// timetamp
+    "created_at": string
+}
+
+interface IOfferData_FixedSwap {
+    "id": number,
+    "height": number,
+    "sender": string as address,
+    "pool_id": number,
+    "swapped_amount0": number,		// NFT number
+    "swapped_amount1": string,		// Pay the total price
+    "ctime": number,
+    "created_at": string
+}
+```
+
+### 4.IHistoryData
+
+testing...
+
+```tsx
+interface IHistoryData {
+    contract: string as address,
+    event: string,					// Event name Enum: Created Swap
+    from: string as address,
+    id: number,
+    price: string,
+    quantity: number,
+    timestamp: number,
+    to: string as address,
+    tokenId: number
+}
+```
+
+### 5.INftData
+
+```tsx
+interface INftData {
+   	"id": number,
+    "contractaddress": string as address,
+    "tokenid": number,
+    "metadata": string,
+    "category": string,					// Enum: image video
+    "channel": string,					// Enum: FineArts Sports Conicbooks 
+    "itemsymbol": string,
+    "standard": number,
+    "itemname": string,
+    "externallink": string,
+    "description": string,
+    "fileurl": string,
+    "litimgurl": string,
+    "supply": number,
+    "creator": string as address,
+    "popularweight": number,
+    "poolweight": number,
+    "likecount": number,
+    "artistpoolweight": number,
+    "created_at": string as address,
+    "updated_at": string
+}
+```
 
