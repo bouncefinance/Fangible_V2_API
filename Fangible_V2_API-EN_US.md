@@ -4,11 +4,12 @@
 >
 > Email: homie_xu@163.com ( If you have any interface problem, please contact me )
 >
-> Update main content: ( 2021-5-25 )
+> Update main content: ( 2021-5-26 )
 >
-> 1. added 2.2 2.3 Three interfaces on the pool details page
-> 2. added 2.5 Get NFT details function
-> 3. three new Typing
+> 1. new interface 1.4 Search 
+> 2. add interface 4.1 Activities List 
+> 3. fix 2.4 Pool Detail ( Trading History ) interface error reporting problem
+> 4. add Typing 6.1 IAccountData
 
 ## Function roadmap
 
@@ -61,6 +62,27 @@ result = {
 #### 1.3 Banner Brands
 
 testing...
+
+#### 1.4 Search
+
+```jsx
+# /api/v2/main/getbrandsbypage
+
+params = {
+	"likestr": "homie"				// Keyword string
+}
+
+result = {
+	"code": 1,						// 1: success	2: error
+	"data": {
+        account: IAccountData[],
+        brands: IBrandData[],
+        items: INftData[]
+    }
+}
+```
+
+#### 
 
 ------
 
@@ -293,6 +315,32 @@ result = {
 }
 ```
 
+### 四、Activities
+
+#### 4.1 Activities List
+
+| environment | BSC-STAGE                          | BSC-MAIN | HECO | ETH  |
+| ----------- | ---------------------------------- | -------- | ---- | ---- |
+| HOST        | https://market-test.bounce.finance |          |      |      |
+| Support     | √                                  | ×        | ×    | ×    |
+
+```jsx
+# /api/v2/main/getbrandsbypage
+
+header = {
+    token: string				// auth sign token
+}
+
+params = {
+  accountaddress: string		// 用户地址
+}
+
+result = {
+    code: 1,
+    data: IHistoryData[]
+}
+```
+
 
 
 -----
@@ -411,6 +459,24 @@ interface INftData {
     "likecount": number,
     "artistpoolweight": number,
     "created_at": string as address,
+    "updated_at": string
+}
+```
+
+### 6.IAccountData
+
+```tsx
+interface IAccountData {
+   	"id": number,
+    "bounceid": number,						// Identity number
+    "email": string,
+    "bandimgurl": string,					// Personal center background
+    "accountaddress": string as address,
+    "username": string,
+    "fullnam": string,
+    "bio": string,
+    "imgurl": string,						// head portrait 
+    "created_at": string,
     "updated_at": string
 }
 ```

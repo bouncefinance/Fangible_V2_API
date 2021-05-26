@@ -1,15 +1,15 @@
-# Fangible V2 API
+#  Fangible V2 API
 
 > Editor: homie_xu						
 >
 > Email: homie_xu@163.com ( If you have any interface problem, please contact me )
 >
-> Update main content: ( 2021-5-24 )
+> Update main content: ( 2021-5-26 )
 >
-> 1. 重新梳理了一下文档接口结构，新增 Typing
-> 2. 新增 Fast Moves、Host Brands 的首页接口
-> 3. 新增创建 brand 的接口，以及获取 my brand List 接口
-> 4. 修正 `# /api/v2/main/getauctionpoolsbypage` 中的 `auction` 拼写错误
+> 1. 新增接口 1.4 Search 
+> 2. 新增接口  4.1 Activities List 
+> 3. 修复 2.4 Pool Detail ( Trading History ) 接口报错问题
+> 4. 新增 Typing  6.1 IAccountData
 
 ## Function roadmap
 
@@ -62,6 +62,29 @@ result = {
 #### 1.3 Banner Brands
 
 testing...
+
+
+
+#### 1.4 Search
+
+```jsx
+# /api/v2/main/getbrandsbypage
+
+params = {
+	"likestr": "homie"				// Keyword string
+}
+
+result = {
+	"code": 1,						// 1: success	2: error
+	"data": {
+        account: IAccountData[],
+        brands: IBrandData[],
+        items: INftData[]
+    }
+}
+```
+
+#### 
 
 ------
 
@@ -159,8 +182,6 @@ result = {
 ```
 
 #### 2.4 Pool Detail (Trading History)
-
-testing...
 
 ```jsx
 # /api/v2/main/getpoolactivities
@@ -292,7 +313,33 @@ result = {
 }
 ```
 
-### 
+### 四、Activities
+
+#### 4.1 Activities List
+
+| environment | BSC-STAGE                          | BSC-MAIN | HECO | ETH  |
+| ----------- | ---------------------------------- | -------- | ---- | ---- |
+| HOST        | https://market-test.bounce.finance |          |      |      |
+| Support     | √                                  | ×        | ×    | ×    |
+
+```jsx
+# /api/v2/main/getbrandsbypage
+
+header = {
+    token: string				// auth sign token
+}
+
+params = {
+  accountaddress: string		// 用户地址
+}
+
+result = {
+    code: 1,
+    data: IHistoryData[]
+}
+```
+
+
 
 -----
 
@@ -375,7 +422,7 @@ testing...
 ```tsx
 interface IHistoryData {
     contract: string as address,
-    event: string,					// Event name Enum: Created Swap
+    event: string,					// Event name Enum: Created Claimed Swapped
     from: string as address,
     id: number,
     price: string,
@@ -410,6 +457,24 @@ interface INftData {
     "likecount": number,
     "artistpoolweight": number,
     "created_at": string as address,
+    "updated_at": string
+}
+```
+
+### 6.IAccountData
+
+```tsx
+interface IAccountData {
+   	"id": number,
+    "bounceid": number,						// Identity number
+    "email": string,
+    "bandimgurl": string,					// Personal center background
+    "accountaddress": string as address,
+    "username": string,
+    "fullnam": string,
+    "bio": string,
+    "imgurl": string,						// head portrait 
+    "created_at": string,
     "updated_at": string
 }
 ```
