@@ -4,12 +4,12 @@
 >
 > Email: homie_xu@163.com ( If you have any interface problem, please contact me )
 >
-> Update main content: ( 2021-5-26 )
+> Update main content: ( 2021-6.10 )
 >
-> 1. new interface 1.4 Search 
-> 2. add interface 4.1 Activities List 
-> 3. fix 2.4 Pool Detail ( Trading History ) interface error reporting problem
-> 4. add Typing 6.1 IAccountData
+> 1. Correct the field "Conicbooks =" Comicbooks (important)
+> 2. add the description of the interface request method GET / POST
+> 3. several interfaces about PoolDetail are being debugged and updated fields, do not use them for the time being, expected to be adjusted and docked within 2 days
+> 4. delete the Chinese translation document, only update the English document
 
 ## Function roadmap
 
@@ -29,6 +29,7 @@
 
 ```jsx
 # /api/v2/main/getfastmoves
+# POST
 
 params = {
 	"limit": 8,				// Amount of each page
@@ -46,6 +47,7 @@ Use `# 3.1 **Brand List**` endpoint
 
 ```jsx
 # /api/v2/main/getbrandsbypage
+# POST
 
 params = {
 	"limit": 4,						// Amount of each page
@@ -67,6 +69,7 @@ testing...
 
 ```jsx
 # /api/v2/main/getbrandsbypage
+# POST
 
 params = {
 	"likestr": "homie"				// Keyword string
@@ -103,6 +106,7 @@ result = {
 
 ```jsx
 # /api/v2/main/getauctionpoolsbypage
+# POST
 
 params = {
 	"category": "",
@@ -136,7 +140,7 @@ result = {
   | " "         | Query pool information for all channels                      |
   | FineArts    | Only the pool information for which the NFT channel  is FineArts is queried |
   | Sports      | Only the pool information for which the NFT channel  is Sports is queried |
-  | Conicbooks  | Only the pool information for which the NFT channel is Conicbooks is queried |
+  | Comicbooks  | Only the pool information for which the NFT channel is Comicbooksis queried |
 
 - **currency**: The address of the contract for the payment token
 
@@ -147,6 +151,8 @@ result = {
 - **orderfield**: sortord, Enum-type( 1:  New  create time 2:  Popular weight)
 
 #### 2.2 Pool Detail (Pool Info)
+
+<Font color='red'>Nullified, in the process of renewal...</Font>
 
 ```jsx
 # /api/v2/main/getpoolinfo
@@ -164,8 +170,11 @@ result = {
 
 #### 2.3 Pool Detail (Offers List)
 
+<Font color='red'>Nullified, in the process of renewal...</Font>
+
 ```jsx
 # /api/v2/main/getpoolbids
+# POST
 
 params = {
 	"poolid": 3,
@@ -181,10 +190,11 @@ result = {
 
 #### 2.4 Pool Detail (Trading History)
 
-testing...
+<Font color='red'>Nullified, in the process of renewal...</Font>
 
 ```jsx
 # /api/v2/main/getpoolactivities
+# POST
 
 params = {
 	"poolid": 3,
@@ -199,8 +209,11 @@ result = {
 
 #### 2.5 Get NFT Info
 
+<Font color='red'>Nullified, in the process of renewal...</Font>
+
 ```jsx
 # /api/v2/main/getonenftinfo
+# POST
 
 params = {
 	"contractaddress": "0xaAAeAe4283635358946E653883cD12E5c06cC5E3",
@@ -234,6 +247,7 @@ result = {
 
 ```jsx
 # /api/v2/main/getbrandsbypage
+# POST
 
 params = {
 	"limit": 10,					// Amount of each page
@@ -271,6 +285,7 @@ newTx.on('transactionHash', hash => {
 
 ```jsx
 # /api/v2/main/getaccountbrands
+# POST
 
 params = {
   "brandname": "string",				// brand name
@@ -300,6 +315,7 @@ result = {
 
 ```jsx
 # /api/v2/main/getbrandsbypage
+# POST
 
 header = {
     token: string				// auth sign token
@@ -326,6 +342,7 @@ result = {
 
 ```jsx
 # /api/v2/main/getbrandsbypage
+# POST
 
 header = {
     token: string				// auth sign token
@@ -394,6 +411,8 @@ interface IBrandData {
 
 ### 3.IOfferData
 
+<Font color='red'>Nullified, in the process of renewal...</Font>
+
 ```tsx
 interface IOfferData_EnglishAuction {
     "id": number,						
@@ -419,7 +438,7 @@ interface IOfferData_FixedSwap {
 
 ### 4.IHistoryData
 
-testing...
+<Font color='red'>Nullified, in the process of renewal...</Font>
 
 ```tsx
 interface IHistoryData {
