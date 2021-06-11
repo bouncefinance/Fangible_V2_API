@@ -2,7 +2,7 @@
 
 > Editor: homie_xu						
 >
-> Email: homie_xu@163.com ( If you have any interface problem, please contact me )
+> Email: homie.xmh@gmail.com ( If you have any interface problem, please contact me )
 >
 > Update main content: ( 2021-6.10 )
 >
